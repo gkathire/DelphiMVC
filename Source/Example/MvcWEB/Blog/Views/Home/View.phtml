@@ -1,0 +1,18 @@
+@{
+Page.Layout := 'Master.Layout';
+Page.Title := 'New';
+}
+
+<h2>New</h2>
+<p>
+<h1>New post</h1>
+<form action="/Home/New" method="POST">
+  <label>Title</label>
+  <input type="hidden" name="id" value="0"/>
+  <input type="text" name="title" size="50" value="@Model.title"/><br/>
+  <label>Body</label><br/>
+  <textarea name="body" cols="50" rows="20">@Model.body</textarea><br/>
+  <input type="submit" value="Create"/>
+</form>
+
+</p>

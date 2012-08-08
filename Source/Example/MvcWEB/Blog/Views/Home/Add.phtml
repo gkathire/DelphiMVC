@@ -1,0 +1,18 @@
+@{
+Page.Layout := 'Master.Layout';
+Page.Title := 'Add New Post';
+}
+
+<h2>New</h2>
+<p>
+<h1>New post</h1>
+<form action="/Home/Add" method="POST">
+  <label>Title</label>
+  <input type="hidden" name="PostId" value="0"/>
+  <input type="text" name="Title" size="50" value=""/><br/>
+  <label>Body</label><br/>
+  <textarea name="Body" cols="50" rows="20"></textarea><br/>
+  <input type="submit" value="Create"/>
+</form>
+
+</p>

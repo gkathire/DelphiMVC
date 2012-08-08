@@ -1,0 +1,14 @@
+<#	// Settings
+    ConnectionStringName = "";			// Uses last connection string in config if not specified
+    Namespace = "";
+	PocoNamespace = "";
+    RepoName = "";
+    GenerateOperations = true;
+	GeneratePocos = true;
+	GenerateCommon = true;
+	ClassPrefix = "";
+	ClassSuffix = "";
+	TrackModifiedColumns = false;
+	IncludeViews = true;
+	GenerateSeperateRecordClass = false;
+#>

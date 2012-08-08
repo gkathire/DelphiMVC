@@ -1,0 +1,65 @@
+﻿<#@ include file="mORMot.Core.ttinclude" #>
+<#@ include file="Settings.ttinclude" #>
+<#@ output extension="pas" #>
+unit BOClasses;
+
+interface
+<#
+var tables = LoadTables();
+InitCommonVariables();
+#>
+
+uses Classes,MvcDBCommon;
+
+type
+<#
+
+foreach(Table tbl in from t in tables where !t.Ignore select t)
+{
+#>   
+  [TMvcDBTableName('<#=tbl.Name#>','<#=tbl.Schema#>')]
+  T<#=tbl.ClassName#> = class
+  private
+<#
+foreach(Column col in from c in tbl.Columns where !c.Ignore select c)
+{
+		// Column bindings
+#>
+    F<#=col.PropertyName#>: <#=col.PropertyType#>;
+<#}#>
+  published
+<#
+foreach(Column col in from c in tbl.Columns where !c.Ignore select c)
+{
+		// Column bindings
+#>
+   <#if(col.Name != col.PropertyName) { #>[TMvcDBColumnName('<#=col.Name#>')]<# WriteLine("");Write("         "); }#><#if(col.IsPK) { #>[TMvcDBPrimaryKeyColumn]<#WriteLine("");Write("   ");}#> <#if(col.IsAutoIncrement) { #>[TMvcDBAutoIncrementColumn]<#WriteLine("");Write("    ");}#><#if(col.Ignore) { #>[TMvcDBIgnoreColumn]<#WriteLine("");Write("   ");}#>property <#=col.PropertyName#>: <#=col.PropertyType#> read F<#=col.PropertyName#> write F<#=col.PropertyName#>;
+<#}#>
+  public
+    constructor Create;overload;
+    constructor CreateNew(<# int i = 0; foreach(Column col in from c in tbl.Columns where !c.Ignore select c) { #><#if (i !=0 ) {#>;<# } #>A<#=col.PropertyName#>:<#=col.PropertyType#><# ++i;} #>);overload;
+  end;
+<#}#>
+
+implementation
+
+<#
+foreach(Table tbl in from t in tables where !t.Ignore select t)
+{
+#>   
+constructor T<#=tbl.ClassName#>.Create;
+begin
+  inherited Create;
+end;
+
+constructor T<#=tbl.ClassName#>.CreateNew(<# int i = 0; foreach(Column col in from c in tbl.Columns where !c.Ignore select c) { #><#if (i !=0 ) {#>;<# } #>A<#=col.PropertyName#>:<#=col.PropertyType#><# ++i;} #>);
+begin
+  inherited Create;
+<#foreach(Column col in from c in tbl.Columns where !c.Ignore select c) { #>
+  <#=col.PropertyName#>:=A<#=col.PropertyName#>;
+<#}#>
+end;
+
+<#}#>
+
+end.

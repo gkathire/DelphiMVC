@@ -1,0 +1,13 @@
+@{
+Page.Layout := 'Common.Layout';
+Page.Title := 'Internal Server Error';
+}
+
+<h2>@Page.Title</h2>
+<p>
+    Error Message - @Model.InternalError
+<br/>
+    Script :
+    <pre class="prettyprint lang-html linenums:1">@Model.Script
+    </pre>
+</p>

@@ -1,0 +1,17 @@
+@{
+Page.Layout := 'Master.Layout';
+Page.Title := 'List Page';
+}
+
+<h2>List of blog Items</h2>
+<p>
+@{
+ var I: Integer;
+ var post:Variant;
+ }
+
+   Items
+   @{ post := Model.GetItem(0); }
+    @{=post.Title }
+
+</p>

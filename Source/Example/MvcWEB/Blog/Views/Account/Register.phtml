@@ -1,0 +1,58 @@
+﻿@{
+Page.Title := 'Register';
+Page.Layout := 'Master.Layout';
+}
+
+<h2>Create a New Account</h2>
+<p>
+    Use the form below to create a new account. 
+</p>
+
+
+<script src="/Scripts/jquery.validate.min.js" type="text/javascript"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js" type="text/javascript"></script>
+
+<form method="post">
+    @Html.ValidationSummary('Account creation was unsuccessful. Please correct the errors and try again.')
+    <div>
+        <fieldset>
+            <legend>Account Information</legend>
+
+            <div class="editor-label">
+                @Html.HtmlLabel('UserName')
+            </div>
+            <div class="editor-field">
+                @Html.TextBox('UserName',Model.UserName)
+                @Html.ValidationMessage('UserName','')
+            </div>
+
+            <div class="editor-label">
+                @Html.HtmlLabel('Email')
+            </div>
+            <div class="editor-field">
+                @Html.TextBox('Email',Model.Email)
+                @Html.ValidationMessage('Email','')
+            </div>
+
+            <div class="editor-label">
+                @Html.HtmlLabel('Password')
+            </div>
+            <div class="editor-field">
+                @Html.Password('Password',Model.Password)
+                @Html.ValidationMessage('Password','')
+            </div>
+
+            <div class="editor-label">
+                @Html.HtmlLabel('Confirm Password')
+            </div>
+            <div class="editor-field">
+                @Html.Password('ConfirmPassword',Model.ConfirmPassword)
+                @Html.ValidationMessage('ConfirmPassword','')
+            </div>
+
+            <p>
+                @Html.SubmitButton('Register','Register')
+            </p>
+        </fieldset>
+    </div>
+</form>
